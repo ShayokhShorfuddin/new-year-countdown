@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <title>New Year Countdown!</title>
+</head>
+
+<body>
+    <h1 onclick="blast()" id="text">Happy New Year Countdown! 🎉</h1>
+    <!-- <h1 id="text">Happy New Year Countdown! <span class="emo">🎉</span></h1> -->
+    <div class="time-section">
+        <div>
+            <p id="days">00</p>
+            <span>Days</span>
+        </div>
+
+        <div>
+            <p id="hours">00</p>
+            <span>Hours</span>
+        </div>
+
+        <div>
+            <p id="minutes">00</p>
+            <span>Minutes</span>
+        </div>
+
+        <div>
+            <p id="seconds">00</p>
+            <span>Seconds</span>
+        </div>
+    </div>
+
+    <script>
+    async function blast(){
+        const jsConfetti = new JSConfetti();
+        await jsConfetti.addConfetti({
+          emojis: ["🎉", "🥳", "👏", "✨", "🎈"],
+          emojiSize: 30,
+          confettiNumber: 50,
+          confettiColors: [
+            "#ff0a54",
+            "#ff477e",
+            "#ff7096",
+            "#ff85a1",
+            "#fbb1bd",
+            "#f9bec7",
+          ],
+        });
+        // window.location.reload();
+    }
+    </script>
+
+
+<script>
+    var countdowndate = new Date('Jan 01, 2023 00:00:00').getTime();
+    var x = setInterval(function(){
+        var now = new Date().getTime();
+        var distance = countdowndate - now;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+        if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= -1) {
+            console.log("Stopped!")
+            clearInterval(x);
+
+
+            setInterval(blast, 5000);
+        }
+
+        else{
+            document.getElementById('days').innerHTML = days;
+            document.getElementById('hours').innerHTML = hours;
+            document.getElementById('minutes').innerHTML = minutes;
+            document.getElementById('seconds').innerHTML = seconds;
+        }
+        
+
+    }, 1000)
+
+
+</script>
+
+
+</body>
+
+</html>
